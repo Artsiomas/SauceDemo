@@ -28,52 +28,7 @@ public class SauceDemo1 {
 
     @Test
     public void SauceDemo() {
-        driver.get("https://www.saucedemo.com/index.html");
 
-        //страничка регистрации
-        driver.findElement(By.className("login_logo"));
-        driver.findElement(By.className("bot_column"));
-
-
-        WebElement searchRegistrationErrors = driver.findElement(By.id("login-button"));
-        searchRegistrationErrors.click();
-        driver.findElement(By.cssSelector("[data-test=error]"));
-
-        WebElement enterYourUsername = driver.findElement(By.id("user-name"));
-        enterYourUsername.sendKeys("111");
-        searchRegistrationErrors.click();
-        driver.findElement(By.cssSelector("[data-test=error]"));
-        WebElement toClearUsername = driver.findElement(By.id("user-name"));
-        toClearUsername.sendKeys(Keys.CONTROL + "a");
-        toClearUsername.sendKeys(Keys.DELETE);
-
-        WebElement enterYourPassword = driver.findElement(By.id("password"));
-        enterYourPassword.sendKeys("111");
-        searchRegistrationErrors.click();
-        driver.findElement(By.cssSelector("[data-test=error]"));
-        WebElement toClearPassword = driver.findElement(By.id("password"));
-        toClearPassword.sendKeys(Keys.CONTROL + "a");
-        toClearPassword.sendKeys(Keys.DELETE);
-
-        enterYourUsername.sendKeys("standard_user");
-        enterYourPassword.sendKeys("secret_sauce");
-        searchRegistrationErrors.click();
-
-       //каталог с товаром
-        driver.findElement(By.className("bm-burger-button"));
-        driver.findElement(By.id("shopping_cart_container"));
-        driver.findElement(By.className("app_logo"));
-        driver.findElement(By.className("product_label"));
-        driver.findElement(By.className("peek"));
-        driver.findElement(By.className("product_label"));
-        List<WebElement> nameGoods = driver.findElements(By.className("inventory_item_name"));
-        List<WebElement> imageGoods = driver.findElements(By.className("inventory_item_img"));
-        List<WebElement> addToCartButton = driver.findElements(By.className("btn_primary btn_inventory"));
-        List<WebElement> descriptionGoods = driver.findElements(By.className("inventory_item_desc"));
-        List<WebElement> costGoods = driver.findElements(By.className("inventory_item_desc"));
-        driver.findElement(By.className("social_twitter"));
-        driver.findElement(By.className("social_facebook"));
-        driver.findElement(By.className("social_linkedin"));
 
     }
 
