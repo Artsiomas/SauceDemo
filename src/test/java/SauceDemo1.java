@@ -28,7 +28,6 @@ public class SauceDemo1 {
 
     @Test
     public void SauceDemo() {
-        driver.get("https://www.saucedemo.com/index.html");
 
         //страничка регистрации
         driver.findElement(By.className("login_logo"));
@@ -73,6 +72,7 @@ public class SauceDemo1 {
         driver.findElement(By.className("social_twitter"));
         driver.findElement(By.className("social_facebook"));
         driver.findElement(By.className("social_linkedin"));
+
 
         //выбираем товар и переходи в корину
         addToCartButton.get(0).click();
