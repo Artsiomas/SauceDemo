@@ -2,8 +2,7 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class CheckoutPage extends BasePage {
-
+public class CheckoutPage extends AbstractBasePage {
     String ADDED_YOUR_FIRST_NAME = "#first-name";
     String ADDED_YOUR_lAST_NAME = "#last-name";
     String ADDED_YOUR_POST_CODE_NAME = "#postal-code";
@@ -11,6 +10,17 @@ public class CheckoutPage extends BasePage {
 
     public CheckoutPage(WebDriver driver) {
         super(driver);
+    }
+
+    @Override
+    public CheckoutPage openPage() {
+        driver.get(URL);
+        return this;
+    }
+
+    @Override
+    public CheckoutPage isPageOpened() {
+        return this;
     }
 
     public void enteredFirstNameLastNamePostCodeAndGoToNextPage(String firstName, String lastName, String postCode) {

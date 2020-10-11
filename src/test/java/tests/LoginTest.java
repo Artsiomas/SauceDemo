@@ -1,53 +1,51 @@
 package tests;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
-import static org.testng.Assert.assertTrue;
 
 public class LoginTest extends BaseTest {
 
     @Test
-    public void registrationWithoutAddedUserNameAndPassword() {
-        driver.get(URL);
-        //сразу кликаем на кнопку регистрации, без ввода логина и пароля
-        WebElement searchRegistrationErrors = driver.findElement(By.id("login-button"));
-        searchRegistrationErrors.click();
-        driver.findElement(By.cssSelector("[data-test=error]"));
-        assertTrue(driver.findElement(By.cssSelector("[data-test=error]")).isDisplayed(), "Ошибка должна отображаться");
+    public void userShouldNotPassAuthorizationWhenEnteredNothing() {
+        loginPage.openPage();
+        loginPage.isPageOpened();
+        loginPage.loginButtonClick();
+        loginPage.errorAuthorizationIsOnThePage();
     }
 
     @Test
-    public void loginPageRegistrationAddedOnlyPassword() {
-        driver.get(URL);
-        //вводим пароль и кликаем на кнопку регистрации, без ввода логина
-        WebElement enterYourPassword = driver.findElement(By.id("password"));
-        enterYourPassword.sendKeys("secret_sauce");
-        WebElement searchRegistrationErrors = driver.findElement(By.id("login-button"));
-        searchRegistrationErrors.click();
-        assertTrue(driver.findElement(By.cssSelector("[data-test=error]")).isDisplayed(), "Ошибка должна отображаться");
+    public void userShouldNotPassAuthorizationWhenEnteredOnlyUserName() {
+        loginPage.openPage();
+        loginPage.isPageOpened();
+        loginPage.authorizationWithAddedOnlyUserName(USERNAME);
+        loginPage.loginButtonClick();
+        loginPage.errorAuthorizationIsOnThePage();
     }
 
     @Test
-    public void loginPageRegistrationAddedOnlyUserName() {
-        driver.get(URL);
-        //вводим логин и кликаем на кнопку регистрации, без ввода пароля
-        WebElement enterYourUsername = driver.findElement(By.id("user-name"));
-        enterYourUsername.sendKeys("standard_user");
-        WebElement searchRegistrationErrors = driver.findElement(By.id("login-button"));
-        searchRegistrationErrors.click();
-        assertTrue(driver.findElement(By.cssSelector("[data-test=error]")).isDisplayed(), "Ошибка должна отображаться");
+    public void userShouldNotPassAuthorizationWhenEnteredOnlyPassword() {
+        loginPage.openPage();
+        loginPage.isPageOpened();
+        loginPage.authorizationWithAddedOnlyPassword(PASSWORD);
+        loginPage.loginButtonClick();
+        loginPage.errorAuthorizationIsOnThePage();
     }
 
     @Test
-    public void loginPageRegistrationWithNotCorrectUserNameAndPassword() {
-        driver.get(URL);
-        //вводим не корректные логин и пароль
-        WebElement enterYourUsername = driver.findElement(By.id("user-name"));
-        enterYourUsername.sendKeys("Artsiom_Zagvozdin");
-        WebElement enterYourPassword = driver.findElement(By.id("password"));
-        enterYourPassword.sendKeys("qwerty123");
-        WebElement searchRegistrationErrors = driver.findElement(By.id("login-button"));
-        searchRegistrationErrors.click();
-        assertTrue(driver.findElement(By.cssSelector("[data-test=error]")).isDisplayed(), "Ошибка должна отображаться");
+    public void userShouldNotPassAuthorizationWithoutCorrectUserNameAndPassword() {
+        loginPage.openPage();
+        loginPage.isPageOpened();
+        loginPage.authorizationWithAddedOnlyUserName("USERNAME");
+        loginPage.authorizationWithAddedOnlyPassword("PASSWORD");
+        loginPage.loginButtonClick();
+        loginPage.errorAuthorizationIsOnThePage();
+    }
+
+    @Test
+    public void userShouldEnterCorrectPasswordAndUserNameForAuthorization() {
+        loginPage.openPage();
+        loginPage.isPageOpened();
+        loginPage.authorizationWithAddedOnlyUserName(USERNAME);
+        loginPage.authorizationWithAddedOnlyPassword(PASSWORD);
+        loginPage.loginButtonClick();
+        productsPage.isPageOpened();
     }
 }

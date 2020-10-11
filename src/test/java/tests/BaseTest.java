@@ -11,7 +11,6 @@ import pages.ProductsPage;
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
-
     WebDriver driver;
     LoginPage loginPage;
     ProductsPage productsPage;
