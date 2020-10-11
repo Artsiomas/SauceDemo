@@ -1,5 +1,4 @@
 package tests;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -9,7 +8,6 @@ import pages.CartPage;
 import pages.CheckoutPage;
 import pages.LoginPage;
 import pages.ProductsPage;
-
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
@@ -22,6 +20,7 @@ public class BaseTest {
 
     public static final String USERNAME = "standard_user";
     public static final String PASSWORD = "secret_sauce";
+    public static final String URL = "https://www.saucedemo.com/";
 
     @BeforeMethod
     public void setup() {

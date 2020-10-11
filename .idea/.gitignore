@@ -2,9 +2,7 @@
 /shelf/
 /workspace.xml
 *.class
-
-
-# Package Files #
 #*.jar
 *.war
 *.ear
+target/*

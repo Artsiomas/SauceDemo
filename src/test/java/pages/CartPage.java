@@ -1,27 +1,22 @@
 package pages;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
 import static org.testng.Assert.assertEquals;
 
 public class CartPage extends BasePage {
-    public static final String URL = "https://www.saucedemo.com/cart.html";
+    public static final String URL_CART_PAGE = URL + "/cart.html";
     String priceLocator = "//*[contains(text(),'%s')]/ancestor::*[@class='cart_item']" +
             "//div[@class='inventory_item_price']";
     String quantityLocator = "//*[contains(text(),'%s')]/ancestor::*[@class='cart_item']" +
             "//div[@class='cart_quantity']";
-    String buttonGoToPageCheckout = "a[href*=checkout-step-one]";
-
-    ////*[contains(text(),'%s')]/ancestor::div[@class='inventory_item']//button
-
+    String buttonGoToPageCheckout = ".checkout_button";
 
     public CartPage(WebDriver driver) {
         super(driver);
     }
 
     public void openPage() {
-        driver.get(URL);
+        driver.get(URL_CART_PAGE);
     }
 
     public void productDetailsShouldBeLike(String productName, String quantity, String price) {
@@ -36,3 +31,4 @@ public class CartPage extends BasePage {
     }
 
 }
+

@@ -1,11 +1,9 @@
 package pages;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class CheckoutPage extends BasePage {
 
-    public static final String URL_CHECKOUT_PAGE = "https://www.saucedemo.com/checkout-step-one.html";
     String ADDED_YOUR_FIRST_NAME = "#first-name";
     String ADDED_YOUR_lAST_NAME = "#last-name";
     String ADDED_YOUR_POST_CODE_NAME = "#postal-code";
