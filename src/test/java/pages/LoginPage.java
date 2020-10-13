@@ -1,10 +1,10 @@
 package pages;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
-import static org.testng.Assert.assertEquals;
 
 public class LoginPage extends AbstractBasePage {
     public static final String URL_END = "/index.html";
@@ -48,8 +48,8 @@ public class LoginPage extends AbstractBasePage {
         return driver.findElement(ERRORS_AUTHORIZATION).getText();
     }
 
-    public void errorAuthorizationIsOnThePage() {
-        assertEquals(driver.findElement(ERRORS_AUTHORIZATION).getText(), "Epic sadface: Username is required", "Текст ошибки ДОЛЖЕН ПОЯВЛЯТЬСЯ и СООТВЕТСТВОВАТЬ заданному");
+    public String errorMessage() {
+        return driver.findElement(ERRORS_AUTHORIZATION).getText();
     }
 
     public void enterLogin(String username, String password) {
