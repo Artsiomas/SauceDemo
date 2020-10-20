@@ -1,53 +1,36 @@
 package tests;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.assertEquals;
 
 public class LoginTest extends BaseTest {
 
-    @Test
-    public void registrationWithoutAddedUserNameAndPassword() {
-        driver.get(URL);
-        //сразу кликаем на кнопку регистрации, без ввода логина и пароля
-        WebElement searchRegistrationErrors = driver.findElement(By.id("login-button"));
-        searchRegistrationErrors.click();
-        driver.findElement(By.cssSelector("[data-test=error]"));
-        assertTrue(driver.findElement(By.cssSelector("[data-test=error]")).isDisplayed(), "Ошибка должна отображаться");
+    @DataProvider(name = "Входящие данные для регистрации")
+    public Object[][] inputForLogin() {
+        return new Object[][]{
+                {"", "", "Epic sadface: Username is required"},
+                {USERNAME, "", "Epic sadface: Password is required"},
+                {"", PASSWORD, "Epic sadface: Username is required"},
+                {"USERNAME", "PASSWORD", "Epic sadface: Username and password do not match any user in this service"},
+        };
+    }
+
+    @Test(dataProvider = "Входящие данные для регистрации", description = "попытка регистрации при вводе не корректных данных")
+    public void userShouldNotPassAuthorizationWhenEnteredNothing(String userName, String password, String errorMessage) {
+        loginPage.openPage();
+        loginPage.isPageOpened();
+        loginPage.authorizationWithAddedOnlyUserName(userName);
+        loginPage.authorizationWithAddedOnlyPassword(password);
+        loginPage.loginButtonClick();
+        assertEquals(loginPage.errorMessage(), errorMessage);
+
     }
 
     @Test
-    public void loginPageRegistrationAddedOnlyPassword() {
-        driver.get(URL);
-        //вводим пароль и кликаем на кнопку регистрации, без ввода логина
-        WebElement enterYourPassword = driver.findElement(By.id("password"));
-        enterYourPassword.sendKeys("secret_sauce");
-        WebElement searchRegistrationErrors = driver.findElement(By.id("login-button"));
-        searchRegistrationErrors.click();
-        assertTrue(driver.findElement(By.cssSelector("[data-test=error]")).isDisplayed(), "Ошибка должна отображаться");
-    }
-
-    @Test
-    public void loginPageRegistrationAddedOnlyUserName() {
-        driver.get(URL);
-        //вводим логин и кликаем на кнопку регистрации, без ввода пароля
-        WebElement enterYourUsername = driver.findElement(By.id("user-name"));
-        enterYourUsername.sendKeys("standard_user");
-        WebElement searchRegistrationErrors = driver.findElement(By.id("login-button"));
-        searchRegistrationErrors.click();
-        assertTrue(driver.findElement(By.cssSelector("[data-test=error]")).isDisplayed(), "Ошибка должна отображаться");
-    }
-
-    @Test
-    public void loginPageRegistrationWithNotCorrectUserNameAndPassword() {
-        driver.get(URL);
-        //вводим не корректные логин и пароль
-        WebElement enterYourUsername = driver.findElement(By.id("user-name"));
-        enterYourUsername.sendKeys("Artsiom_Zagvozdin");
-        WebElement enterYourPassword = driver.findElement(By.id("password"));
-        enterYourPassword.sendKeys("qwerty123");
-        WebElement searchRegistrationErrors = driver.findElement(By.id("login-button"));
-        searchRegistrationErrors.click();
-        assertTrue(driver.findElement(By.cssSelector("[data-test=error]")).isDisplayed(), "Ошибка должна отображаться");
+    public void userShouldNotPassAuthorizationWhenEnteredOnlyUserName() {
+        loginPage.openPage();
+        loginPage.isPageOpened();
+        loginPage.authorizationWithAddedOnlyUserName(USERNAME);
+        loginPage.loginButtonClick();
     }
 }
